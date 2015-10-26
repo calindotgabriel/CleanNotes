@@ -49,6 +49,24 @@ namespace CleanTests
             
         }
 
+        [TestMethod]
+        public void TestCaching()
+        {
+            string path = TestFileIO.FILE_PATH;
+            JsonFileRepo repo = new JsonFileRepo(path);
+            repo.Save(new Note("1", "234"));
+
+            DateTime lastModified = System.IO.File.GetLastWriteTime(path);
+
+            repo.GetAll();
+
+            List<Note> cached = repo.CacheMap[lastModified];
+
+            Assert.IsNotNull(cached);
+           
+
+        }
+
         [TestInitialize]
         public void CleanUp()
         {

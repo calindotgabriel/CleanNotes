@@ -9,8 +9,16 @@ namespace CleanRepo
 {
     public class JsonFileRepo : AbstractFileRepo<Note, int>
     {
+        
+        private CacheMap<List<Note>> cacheMap;
+
+        public CacheMap<List<Note>> CacheMap { get { return cacheMap; } }
+
         public JsonFileRepo(string pathName)
-            : base(pathName) {}
+            : base(pathName) 
+        {
+            cacheMap = new CacheMap<List<Note>>();
+        }
 
         public override void Save(Note item)
         {
@@ -42,6 +50,13 @@ namespace CleanRepo
         
         override public List<Note> GetAll()
         {
+            DateTime lastWritten = GetLastTimeWritten(GetPath());
+            List<Note> cached = cacheMap[lastWritten];
+            if (cached != null)
+            {
+                return cached;
+            }
+
             List<Note> list = new List<Note>();
             string[] all = System.IO.File.ReadAllLines(GetPath());
             foreach (string line in all)
@@ -50,7 +65,15 @@ namespace CleanRepo
                 Note note = Serializer.Deserialize(line);
                 list.Add(note);
             }
+            DateTime writeTime = GetLastTimeWritten(GetPath());
+            cacheMap.Add(writeTime, list);
+
             return list;
+        }
+
+        private DateTime GetLastTimeWritten(string path)
+        {
+            return System.IO.File.GetLastWriteTime(path);
         }
     }
 }
