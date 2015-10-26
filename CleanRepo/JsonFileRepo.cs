@@ -20,6 +20,9 @@ namespace CleanRepo
             System.IO.File.AppendAllText(GetPath(), s + System.Environment.NewLine);
         }
 
+        /**
+         * Auto-increment feature
+         */
         private void handleId(Note item)
         {
             item.Id = Size() + 1;
@@ -36,8 +39,8 @@ namespace CleanRepo
             return GetAll().Count;
         }
 
-        //todo moveto generic.
-        public List<Note> GetAll()
+        
+        override public List<Note> GetAll()
         {
             List<Note> list = new List<Note>();
             string[] all = System.IO.File.ReadAllLines(GetPath());

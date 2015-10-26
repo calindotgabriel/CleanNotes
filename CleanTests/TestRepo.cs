@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CleanRepo;
 using CleanNotes;
+using System.Collections.Generic;
 
 namespace CleanTests
 {
@@ -42,6 +43,10 @@ namespace CleanTests
                 Assert.Fail();
             }
             catch (RepoException) { }
+
+            List<Note> all = repo.GetAll();
+            Assert.AreEqual(note1, all[0]);
+            
         }
 
         [TestInitialize]

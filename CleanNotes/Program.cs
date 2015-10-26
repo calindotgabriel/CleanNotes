@@ -10,9 +10,9 @@ namespace CleanNotes
     {
         static void Main(string[] args)
         {
-            Note note = new Note("todo", "fii mai macanache");
-            Console.WriteLine(note.Title);
-
+            CleanForm form = new CleanForm();
+            form.ShowDialog();
+            
         }
     }
 }

@@ -26,10 +26,23 @@ namespace CleanNotes
         }
 
 
-        public int Id { get { return Id; } set { id = value; } }
+        public int Id { get { return id; } set { id = value; } }
         public string Title { get { return title; } set { title = value; } }
         public string Content { get { return content; } set { content = value; } }
-        
-        
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+                return false;
+
+            Note n = (Note)obj;
+
+            return this.Id == n.Id;
+        }
+
+        public override int GetHashCode()
+        {
+            return 31 * id / new Random().Next();
+        }
     }
 }

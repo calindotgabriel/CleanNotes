@@ -24,6 +24,11 @@ namespace CleanRepo
             return (Note) entities[id];
         }
 
+        public override List<Note> GetAll()
+        {
+            return entities.Cast<Note>().ToList();
+        }
+
         
     }
 }
