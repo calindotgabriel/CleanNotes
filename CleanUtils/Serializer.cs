@@ -5,9 +5,8 @@ using System.Linq;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
-using CleanModel;
 
-namespace CleanUtils
+namespace CleanNotes
 {
     public class Serializer
     {

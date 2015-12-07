@@ -16,14 +16,12 @@ namespace CleanNotes
         {
             InitializeComponent();
 
-            InitListView();
+            AddItemsToListView();
         }
 
-        private void InitListView()
+        private void AddItemsToListView()
         {
-           
-
-            listView1.Items.Add(new ListViewItem("test"));
+            mainListView.Items.Add(new ListViewItem("test"));
         }
 
     }

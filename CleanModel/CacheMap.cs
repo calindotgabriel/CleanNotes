@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CleanNotes
+namespace CleanModel
 {
     public class CacheMap<T> : Dictionary<DateTime, T>
     {
